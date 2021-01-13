@@ -111,15 +111,9 @@ int main() {
             obs.y = y_sense[i];
             noisy_observations.push_back(obs);
           }
-
           // Update the weights and resample
           pf.updateWeights(sensor_range, sigma_landmark, noisy_observations, map);
           pf.resample();
-          // // // int i = 0;
-          // // // for (auto particle : pf.particles){
-          // // //   std::cout << i + 1 << ": " << particle.x << " " << particle.y << " " << particle.theta << "      " << particle.weight<< std::endl;
-          // // //   i++;
-          // // // }
 
           // Calculate and output the average weighted error of the particle 
           //   filter over all time steps so far.
@@ -136,6 +130,16 @@ int main() {
 
             weight_sum += particles[i].weight;
           }
+
+          // double gt_x = std::stod(j[1]["sense_x"].get<string>());
+          // double gt_y = std::stod(j[1]["sense_y"].get<string>());
+          // double gt_theta = std::stod(j[1]["sense_theta"].get<string>());
+
+          // double* error= getError(gt_x,gt_y,gt_theta, best_particle.x,
+          //          best_particle.y, best_particle.theta);
+          // std::cout << "X err: " << error[0]
+          //           << " Y err: " << error[1]
+          //           << " Theta err: " << error[2] << std::endl;
 
           std::cout << "highest w " << highest_weight << std::endl;
           std::cout << "average w " << weight_sum/num_particles << std::endl;

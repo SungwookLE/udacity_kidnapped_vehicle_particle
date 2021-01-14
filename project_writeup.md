@@ -1,18 +1,18 @@
 # PROJECT WRITEUP
 
-> **AUTHOR**: SungwookLE
-> **DATE**: '21.1/14
-> **NOTE**: This document is written for explaining the pipeline of the code
+> **AUTHOR**: SungwookLE<br/> > **DATE**: '21.1/14<br/> > **NOTE**: This document is written for explaining the pipeline of the code<br/>
 
 [//]: # "Image References"
 [image1]: ./data/map_data.png "Model Visualization"
 [image2]: ./data/Simulation_results.png "Pass"
 
+<br/>
 ### Requirements and Data, Introduction
 
 > > **Requirement**: Check Here! [Rubric](https://review.udacity.com/#!/rubrics/747/view).
 > > **Given Map Data**: Below image. ![alt_text][image1].
 > > **Introduction**: This project for localization of ego-vehicle in given map and sensor observation. Using Particle filter algorithm, this code would localize the ego vehicle position according to time stamp. Particle filter is one of the probabilitic approach filter, and we assume the X,Y plain field excluding height of the field. Map Data points and observation points are associated using the nearest neighbor algorithm that is one of the simplest data association.
+> > <br/>
 
 ### MAIN
 
@@ -188,7 +188,7 @@ for (int n = 0; n < num_particles; ++n){
 }
 ```
 
-Each particle are exectuted same process
+Each particle are exectuted same process<br/>
 **STEP1.** transformed the observation data respectively using rotation matrix.
 
 $$
@@ -197,6 +197,7 @@ xm​=xp​+(cosθ×xc​)−(sinθ×yc​)
 \\ym​=yp​+(sinθ×xc​)+(cosθ×yc​)
 $$
 
+<br/>
 **STEP2.** data association
 Before data association , Check the landmark whether in sensor range or not.
 For this, I defined `std::vector<LandmarkObs> candidated_landmarks{}`.
@@ -224,7 +225,7 @@ void ParticleFilter::dataAssociation(vector<LandmarkObs> predicted,
 ```
 
 The matching information is saved in observations object as ID. This information well transfered out of this function. Because argument is declared as reference( call by reference)
-
+<br/>
 **STEP3.** updating weight to each particle
 Update the weights of each particle using a mult-variate Gaussian distribution.
 
@@ -306,6 +307,7 @@ void ParticleFilter::resample() {
 Those are the thing that I implemented about particle_filter class.
 Let's back to the main.cpp.
 And then, the particle weight and x,y location is transfered to simulation program.
+<br/>
 
 ### Results
 
